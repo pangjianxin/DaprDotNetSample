@@ -1,0 +1,99 @@
+version: '3.4'
+
+services:
+  ############################
+  # Redis state store
+  ############################
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    networks:
+      - demo_web
+
+  ############################
+  # Dapr actor placement service
+  ############################
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+    networks:
+      - demo_web
+
+  ############################
+  # Dapr zipkin service
+  ############################
+  zipkin:
+    image: "openzipkin/zipkin:latest"
+    ports:
+      - "9412:9411"
+    networks:
+      - demo_web
+
+  ############################
+  # MyFrontEnd service
+  ############################
+  myfrontend:
+    image: ${DOCKER_REGISTRY-}myfrontend
+    build:
+      context: .
+      dockerfile: MyFrontEnd/Dockerfile
+    ports:
+      - "51000:8081"
+    environment:
+      - "ASPNETCORE_URLS=http://*:8081;"
+    volumes: 
+      - "./MyFrontEnd:/app"
+    networks:
+      - demo_web
+
+  myfrontend-dapr:
+    image: "daprio/daprd:latest"
+    command: [ "./daprd", 
+    "-app-id", "MyFrontEnd", 
+    "-app-port", "8081", 
+    "-placement-host-address", "placement:50006",
+     "-config","/dapr/config.yaml",
+    "-components-path", "/dapr/components"]
+    depends_on:
+      - myfrontend
+    volumes:
+      - "./dapr:/dapr"
+    network_mode: "service:myfrontend"
+
+  ############################
+  # MyBackEnd service
+  ############################
+  mybackend:
+    image: ${DOCKER_REGISTRY-}mybackend
+    build:
+      context: .
+      dockerfile: MyBackEnd/Dockerfile
+    ports:
+      - "52000:8082"
+    environment:
+      - "ASPNETCORE_URLS=http://*:8082;"
+    volumes:
+      - "./MyBackEnd:/app"
+    networks:
+      - demo_web
+
+  mybackend-dapr:
+    image: "daprio/daprd:latest"
+    command: [ "./daprd", 
+    "-app-id", "MyBackEnd", 
+    "-app-port", "8082" ,
+    "-placement-host-address", "placement:50006",
+    "-config","/dapr/config.yaml",
+    "-components-path", "/dapr/components"]
+    depends_on:
+      - mybackend
+    volumes:
+      - "./dapr/:/dapr"
+    network_mode: "service:mybackend"
+
+networks:
+  demo_web:
+

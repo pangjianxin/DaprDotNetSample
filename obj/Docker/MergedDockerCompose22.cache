@@ -1,0 +1,122 @@
+networks:
+  demo_web: {}
+services:
+  mybackend:
+    build:
+      context: C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer
+      dockerfile: MyBackEnd/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: MyBackEnd
+      target: base
+    container_name: MyBackEnd
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: mybackend:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net6.0/MyBackEnd.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      demo_web: {}
+    ports:
+    - target: 80
+    - published: 52000
+      target: 50001
+    tty: true
+    volumes:
+    - C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer\MyBackEnd:/app:rw
+    - C:\Users\Administrator\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\Administrator\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Administrator\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/root/.nuget/fallbackpackages:ro
+    - C:\Users\Administrator\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer:/src:rw
+  mybackend-dapr:
+    command:
+    - ./daprd
+    - -app-id
+    - MyBackEnd
+    - -app-port
+    - '80'
+    depends_on:
+      mybackend:
+        condition: service_started
+    image: daprio/daprd:latest
+    network_mode: service:mybackend
+  myfrontend:
+    build:
+      context: C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer
+      dockerfile: MyFrontEnd/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: MyFrontEnd
+      target: base
+    container_name: MyFrontEnd
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: myfrontend:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net6.0/MyFrontEnd.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      demo_web: {}
+    ports:
+    - target: 80
+    - published: 51000
+      target: 50001
+    tty: true
+    volumes:
+    - C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer\MyFrontEnd:/app:rw
+    - C:\Users\Administrator\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\Administrator\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Administrator\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/root/.nuget/fallbackpackages:ro
+    - C:\Users\Administrator\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer:/src:rw
+  myfrontend-dapr:
+    command:
+    - ./daprd
+    - -app-id
+    - MyFrontEnd
+    - -app-port
+    - '80'
+    depends_on:
+      myfrontend:
+        condition: service_started
+    image: daprio/daprd:latest
+    network_mode: service:myfrontend
+  placement:
+    command:
+    - ./placement
+    - -port
+    - '50006'
+    image: daprio/dapr
+    networks:
+      demo_web: {}
+    ports:
+    - published: 50006
+      target: 50006
+  redis:
+    image: redis:alpine
+    networks:
+      demo_web: {}
+    ports:
+    - published: 6380
+      target: 6379
+version: '3.4'

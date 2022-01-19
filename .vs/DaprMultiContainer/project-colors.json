@@ -1,0 +1,51 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "0bc94f03-aae5-4292-adc0-bfb4227dac52": {
+      "ProjectGuid": "0bc94f03-aae5-4292-adc0-bfb4227dac52",
+      "DisplayName": "MyBackEnd",
+      "ColorIndex": 0
+    },
+    "5284c8af-6b08-48f6-9538-57a939713929": {
+      "ProjectGuid": "5284c8af-6b08-48f6-9538-57a939713929",
+      "DisplayName": "MyFrontEnd",
+      "ColorIndex": 1
+    },
+    "ec79faee-f44a-4742-aa62-26be7337169d": {
+      "ProjectGuid": "ec79faee-f44a-4742-aa62-26be7337169d",
+      "DisplayName": "docker-compose",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "杂项文件",
+      "ColorIndex": -1
+    },
+    "a9e21cf7-6547-47be-a0bd-4efa8b1be170": {
+      "ProjectGuid": "a9e21cf7-6547-47be-a0bd-4efa8b1be170",
+      "DisplayName": "components",
+      "ColorIndex": 3
+    },
+    "9cbe3f0d-bdbc-4909-b27e-65a9bbfe8641": {
+      "ProjectGuid": "9cbe3f0d-bdbc-4909-b27e-65a9bbfe8641",
+      "DisplayName": "components",
+      "ColorIndex": 4
+    },
+    "5c97e61a-1926-44cd-b0bd-0ccb11be5b6a": {
+      "ProjectGuid": "5c97e61a-1926-44cd-b0bd-0ccb11be5b6a",
+      "DisplayName": "dapr",
+      "ColorIndex": 5
+    },
+    "13a5d92c-b44a-4de2-996f-446742fc75e9": {
+      "ProjectGuid": "13a5d92c-b44a-4de2-996f-446742fc75e9",
+      "DisplayName": "Shared",
+      "ColorIndex": 6
+    },
+    "bc283a32-fa79-402d-9d18-8e89cff8f705": {
+      "ProjectGuid": "bc283a32-fa79-402d-9d18-8e89cff8f705",
+      "DisplayName": "Shared",
+      "ColorIndex": 7
+    }
+  },
+  "NextColorIndex": 8
+}

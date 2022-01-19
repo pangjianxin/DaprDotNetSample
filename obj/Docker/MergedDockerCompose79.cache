@@ -1,0 +1,98 @@
+networks:
+  demo_web: {}
+services:
+  mybackend:
+    build:
+      context: C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer
+      dockerfile: MyBackEnd/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://*:8082;
+    image: mybackend
+    networks:
+      demo_web: {}
+    ports:
+    - target: 80
+    - published: 52000
+      target: 8082
+  mybackend-dapr:
+    command:
+    - ./daprd
+    - -app-id
+    - MyBackEnd
+    - -app-port
+    - '8082'
+    - -placement-host-address
+    - placement:50006
+    - -config
+    - /dapr/config.yaml
+    - -components-path
+    - /dapr/components
+    depends_on:
+      mybackend:
+        condition: service_started
+    image: daprio/daprd:latest
+    network_mode: service:mybackend
+    volumes:
+    - C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer\dapr:/dapr:rw
+  myfrontend:
+    build:
+      context: C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer
+      dockerfile: MyFrontEnd/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://*:8081;
+    image: myfrontend
+    networks:
+      demo_web: {}
+    ports:
+    - target: 80
+    - published: 51000
+      target: 8081
+  myfrontend-dapr:
+    command:
+    - ./daprd
+    - -app-id
+    - MyFrontEnd
+    - -app-port
+    - '8081'
+    - -placement-host-address
+    - placement:50006
+    - -components-path
+    - /dapr/components
+    depends_on:
+      myfrontend:
+        condition: service_started
+    image: daprio/daprd:latest
+    network_mode: service:myfrontend
+    volumes:
+    - C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer\dapr:/dapr:rw
+  placement:
+    command:
+    - ./placement
+    - -port
+    - '50006'
+    image: daprio/dapr
+    networks:
+      demo_web: {}
+    ports:
+    - published: 50006
+      target: 50006
+  redis:
+    image: redis:latest
+    networks:
+      demo_web: {}
+    ports:
+    - published: 6380
+      target: 6379
+  zipkin:
+    command:
+    - /zipkin
+    - start-zipkin
+    image: openzipkin/zipkin:latest
+    networks:
+      demo_web: {}
+    ports:
+    - published: 9412
+      target: 9411
+version: '3.4'

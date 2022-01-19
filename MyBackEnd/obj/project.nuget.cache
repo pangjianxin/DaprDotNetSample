@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "JOEgwMei4N/nGnZgbRABVp0JLbZjmOjQ/0sQeg0/3S96++/ShdnMmmvtOMYrqxnwbi0y0bBrJovsBhXFX1ItaQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\daprTest\\DaprMultiContainer\\MyBackEnd\\MyBackEnd.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\dapr.actors\\1.5.0\\dapr.actors.1.5.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\dapr.actors.aspnetcore\\1.5.0\\dapr.actors.aspnetcore.1.5.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\dapr.aspnetcore\\1.5.0\\dapr.aspnetcore.1.5.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\dapr.client\\1.5.0\\dapr.client.1.5.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\google.api.commonprotos\\2.2.0\\google.api.commonprotos.2.2.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\google.protobuf\\3.13.0\\google.protobuf.3.13.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\grpc.core.api\\2.32.0\\grpc.core.api.2.32.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\grpc.net.client\\2.32.0\\grpc.net.client.2.32.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\grpc.net.common\\2.32.0\\grpc.net.common.2.32.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.0\\microsoft.extensions.logging.abstractions.3.1.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.14.0\\microsoft.visualstudio.azure.containers.tools.targets.1.14.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.5.1\\system.diagnostics.diagnosticsource.4.5.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.io.pipelines\\4.7.2\\system.io.pipelines.4.7.2.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.net.http.json\\5.0.0\\system.net.http.json.5.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+  ],
+  "logs": []
+}

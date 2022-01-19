@@ -1,0 +1,24 @@
+services:
+  mybackend:
+    build:
+      context: C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer
+      dockerfile: MyBackEnd/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: mybackend
+    ports:
+    - target: 80
+    - published: 52000
+      target: 50001
+  myfrontend:
+    build:
+      context: C:\Users\Administrator\Desktop\daprTest\DaprMultiContainer
+      dockerfile: MyFrontEnd/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: myfrontend
+    ports:
+    - target: 80
+    - published: 51000
+      target: 50001
+version: '3.4'
